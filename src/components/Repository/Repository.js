@@ -4,7 +4,7 @@ export const Repository = ({titulo, descricao, destacar}) => {
     return (
         <>
             <h3>{titulo}</h3>
-            <span>projeto em destaque!</span>
+            {destacar&&(<span>projeto em destaque!</span>)}
             <p>{descricao}</p>
         </> 
     )
