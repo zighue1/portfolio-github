@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
+import Styles from './Repository.module.css'
 
 export const Repository = ({titulo, descricao, destacar}) => {
     return (
-        <>
+        <div className={Styles.Repository} styles={{color:'red'}}>
             <h3>{titulo}</h3>
-            {destacar&&(<span>projeto em destaque!</span>)}
             <p>{descricao}</p>
-        </> 
+        </div> 
     )
 }
 

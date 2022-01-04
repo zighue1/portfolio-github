@@ -1,0 +1,11 @@
+.Repository{
+    display: flex;
+ 
+    border: solid 1px rgb(220, 220, 220);
+    margin: 8px 3px 8px 3px;
+    padding: 5px 
+}
+
+.Repository > h3 {
+    color: red;
+}

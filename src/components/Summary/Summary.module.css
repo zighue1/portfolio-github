@@ -1,0 +1,12 @@
+img{
+    width: 150px;
+}
+h2{
+    text-align: center;
+}
+
+.DivSummary{
+    margin: 3px;
+    padding: 5px ;
+    border: rgba(175, 172, 172, 0.616) solid 2px;
+}
