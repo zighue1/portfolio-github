@@ -1,11 +1,40 @@
 .Repository{
     display: flex;
- 
-    border: solid 1px rgb(220, 220, 220);
-    margin: 8px 3px 8px 3px;
-    padding: 5px 
+    
+    
+    margin: 15px 3px 15px 3px;
+    padding: 5px ;
+    border-radius: 7px;
 }
 
-.Repository > h3 {
+.tituloContainer > h3 {
+    white-space: nowrap;
+    text-align:center;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    
+    margin-bottom: 0;
+    
+}
+
+.tituloContainer > span {
     color: red;
+}
+.Repository > p {
+    flex: auto;
+    padding: 0px 0px 0px 15px;
+    margin-top: 10px;
+    
+}
+.Destacado{
+    border: solid 3px rgb(255, 187, 0);
+}
+
+.Normal{
+    border: solid 3px rgb(220, 220, 220);
+}
+
+.tituloContainer{
+
 }

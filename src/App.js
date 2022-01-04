@@ -13,11 +13,11 @@ function App() {
   ]
   //({id, titulo, descricao}  
   //()
-
+  
   return (
     <div className="App">
       <Summary imagem="https://github.com/zighue1.png" nome="Federico Zighue Muino Robillard"></Summary>
-      <Repository titulo={"Conheça meu Projeto"} descricao={"meu code nao ta escrevendo o lorem dentro do jsx"} destacar={true}></Repository>
+      <Repository titulo={"Conheça meu Projeto"} descricao={"meu code nao ta escrevendo o lorem dentro do jsx meu code nao ta escrevendo o lorem dentro do jsx meu code nao ta escrevendo o lorem dentro do jsx meu code nao ta escrevendo o lorem dentro do jsx meu code nao ta escrevendo o lorem dentro do jsx meu code nao ta escrevendo o lorem dentro do jsx meu code nao ta escrevendo o lorem dentro do jsx meu code nao ta escrevendo o lorem dentro do jsx meu code nao ta escrevendo o lorem dentro do jsx"} destacar={true}></Repository>
       <h1>Meu Portfólio Github</h1>
       {lista_Repositorios.length === 0?("Nenhum Repositório Disponível"):
           lista_Repositorios.map(elemento => 
