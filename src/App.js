@@ -1,55 +1,86 @@
 import { Repository } from "./components/Repository";
 import { Summary } from "./components/Summary/Summary";
-import { useState, useEffect} from "react"
+import { useState, useEffect, useReducer} from "react"
 import {mapToRepoObject} from "./data/data-utils"
+import { NomeAutenticado } from "./components/NomeAutenticado/NomeAutenticado";
+import { Botao } from "./components/Botao/Botao";
+import { AutenticacaoContext, AutenticacaoProvider, useAutenticacao } from "./context";
+import { Home } from "./components/Home/Home";
+import { Router } from "./routes/Router";
+import { BrowserRouter } from 'react-router-dom';
 
 function App() {
-  /*
-  const [repositorios, setrepositorios] = useState([
-    {id: 1, titulo: "um texto qualquer", descricao: "uma string qualquer", destacar:false},
-    {id: 2, titulo: "um texto qualquer", descricao: "uma string qualquer", destacar:false},
-    {id: 3, titulo: "PROJETO EM DESTAQUE", descricao: "meu code nao ta escrevendo o lorem dentro do jsx meu code nao ta escrevendo o lorem dentro do jsx meu code nao ta escrevendo o lorem dentro do jsx meu code nao ta escrevendo o lorem dentro do jsx meu code nao ta escrevendo o lorem dentro do jsx meu code nao ta escrevendo o lorem dentro do jsx meu code nao ta escrevendo o lorem dentro do jsx meu code nao ta escrevendo o lorem dentro do jsx meu code nao ta escrevendo o lorem dentro do jsx", destacar:true},
-    {id: 4, titulo: "um texto qualquer", descricao: "uma string qualquer", destacar:false},
-    {id: 5, titulo: "um texto qualquer", descricao: "uma string qualquer", destacar:false}
-  ]);
- */
-  const [repositorios, setrepositorios] = useState([])
-  const [nomeUsuario, setnomeUsuario] = useState('zighue1');
 
-  const handleNomeUsuario = (text) => {
-    setnomeUsuario(text)
+/*  // EXERCICIO 3
+  const inicialValue = []
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case "add":
+        return [...state,new Date()] 
+      case "rmv":
+        return state.slice(0,-1)
+      default:
+        return state;
+    }
   }
-  const handleBuscar = () => {
-  //  fetchDadosDoUsuario()
+*/
+
+/*    // EXERCICIO 4
+const inicialValue = [0]
+  const reducer = (state, action) => {
+    console.log(state.result)
+    switch (action.type) {
+      case "Somar":
+        return [(parseInt(state)+parseInt(numero))] 
+      case "Subtrair":
+        return [(parseInt(state)-parseInt(numero))] 
+      case "Dividir":
+        return [(parseInt(state)/parseInt(numero))] 
+      case "Multiplicar":
+        return [(parseInt(state)*parseInt(numero))] 
+      default:
+        return state;
+    }
   }
 
-  const fetchDadosDoUsuario = () =>{
-    fetch(`https://api.github.com/users/${nomeUsuario}/repos`).then(r => {
-      r.json().then(r => {
-        console.log(r)
-        const resultadoMapeado = mapToRepoObject(r);
-        setrepositorios(resultadoMapeado)
-      })
-    })
-  }
-  useEffect(() => {
-   fetchDadosDoUsuario()
-   
-  }, []);
-  
+    const [operacao, setoperacao] = useState('Somar');
+  const [numero, setnumero] = useState(0);
+  const [state, dispatch] = useReducer(reducer, inicialValue)
+
+  //JSX EXERCICIO 3 e 4
+  <h1>Lista de datas</h1>
+      <button onClick={()=> dispatch({type: 'add'})}>Adicionar</button>
+      <button onClick={()=> dispatch({type: 'rmv'})}>Remover</button>
+     <ul>
+      {//state.map((e, index )=> (<li key={index}>{e.toLocaleString('pt-BR')}</li>))
+      }
+     </ul>
+     
+     <input type={'number'} onChange={e=>{setnumero(e.target.value)}}></input>
+     
+     <select onChange={e=>{setoperacao(e.target.value)}}>
+       <option value={'Somar'}>Somar</option>
+       <option value={'Subtrair'}>Subtrair</option>
+       <option value={'Dividir'}>Dividir</option>
+       <option value={'Multiplicar'}>Multiplicar</option>
+     </select>
+     <button onClick={()=> dispatch({type: operacao})}>Confirmar</button>
+     <p>Resultado: {state}</p>
+  */
+
+
+
+ 
   return (
     <div className="App">
-      <Summary imagem="https://github.com/zighue1.png" nome="Federico Zighue Muino Robillard"></Summary>
-      <input onChange={e=>{handleNomeUsuario(e.target.value)}} value={nomeUsuario}></input> <button onClick={handleBuscar()}>Buscar</button>
-      <h1>Meu Portfólio Github</h1>
-      {repositorios.length === 0?("Nenhum Repositório Disponível"):
-       
-              repositorios.map(elemento => 
-                (<Repository key={elemento.id} titulo={elemento.titulo} descricao={elemento.descricao} destacar={elemento.destacar}></Repository>)
-             
-          )}
+      <AutenticacaoProvider>
+      <BrowserRouter>
+          <Router />
+        </BrowserRouter>
       
-    </div>
+      </AutenticacaoProvider>
+   </div>
+    
   );
 }
 
