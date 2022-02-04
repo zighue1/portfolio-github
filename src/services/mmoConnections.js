@@ -8,12 +8,8 @@ export const mmoConnections = async function (url) {
                     "x-rapidapi-key": "90e4a82796msh84d32f0d28c872cp10ff8ajsn2a2ec716db80"
                 }
             })
-
-        return await response.json()
-           
-                    
-
-   
+            response = await response.json()
+        return response  
 }
 
 export const mmoLinkTable = [

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 export const Card = ({jogo}) => {
    /* developer: "Phoenix Labs, Iron Galaxy"
@@ -13,7 +14,7 @@ export const Card = ({jogo}) => {
     thumbnail: "https://www.mmobomb.com/g/1/thumbnail.jpg"
     title: "Dauntless"   
     */
-
+    const navigate = useNavigate();
     const MyCard = styled.div`
         background-color: gray;
         width: 250px;
@@ -21,10 +22,7 @@ export const Card = ({jogo}) => {
         margin: 5px;
     `;
     const MyButton = styled.button`
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        color: blue;
+         
     `;
     const MyP = styled.p`text-align: center;`;
 
@@ -39,7 +37,7 @@ export const Card = ({jogo}) => {
             <p style={{textAlign: 'center'}}>{jogo.title}  <span>{jogo.platform}</span></p>
             <Logo src={jogo.thumbnail} />
             <MyP>{jogo.short_description.slice(0,100)+"..."}</MyP>
-            <MyButton>Veja Mais</MyButton>
+            <MyButton onClick={() => navigate(`jogo/${jogo.id}`)}>Veja Mais</MyButton>
         </MyCard>
     );
 }

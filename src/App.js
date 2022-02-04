@@ -73,12 +73,12 @@ const inicialValue = [0]
  
   return (
     <div className="App">
-      <AutenticacaoProvider>
+    
       <BrowserRouter>
           <Router />
         </BrowserRouter>
       
-      </AutenticacaoProvider>
+    
    </div>
     
   );
