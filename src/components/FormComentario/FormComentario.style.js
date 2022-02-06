@@ -10,7 +10,6 @@ export const DivSuperior = styled.div`
 export const DivInferior = styled.div`
         display: flex;
         flex-direction: column;
-
     `;
 export const DivNome = styled.div`
     
@@ -45,12 +44,12 @@ export const VotoDown = styled.div`
         border-top: 25px solid #555;
     `
     export const PontuacaoP = styled.p`
-        
+   
 
-        .red {
+        &.red {
             color: red;
         }
-        .green {
+        &.green {
             color: green;
         }
     `;

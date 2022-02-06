@@ -1,53 +1,48 @@
 import { Formik, Field, Form, ErrorMessage} from "formik"
-import { useEffect, useReducer, useState } from "react";
+import { useReducer } from "react";
 
 import * as Yup from 'yup'
 import {DivSuperior, MeuTextarea, VotoDown, VotoUp, ComentarioP, Nome, ContainerComentarios, DivComentario, DivInferior, DivNome, DivEmail, PontuacaoP} from "./FormComentario.style"
 function reducer(state, action) {
+    const newArr = JSON.parse(JSON.stringify(state))
     switch (action.type) {
+       
       case 'increment':
-          
-        state[action.index].ponto+=0.5
-        console.log('entrei 2x?', state)
-        return [...state];
+        newArr[action.index].ponto++
+        localStorage.setItem("comentarios",JSON.stringify(newArr))
+        return newArr;
       case 'decrement':
-        state[action.index].ponto-=0.5
-        return [...state];
+        newArr[action.index].ponto--
+        localStorage.setItem("comentarios",JSON.stringify(newArr))
+        return newArr;
+        case 'addComent':
+            newArr.push(action.p)
+            localStorage.setItem("comentarios",JSON.stringify(newArr))
+            return newArr;
       default:
         throw new Error();
     }
 }
 
-export const FormComentario = () => {
+export const FormComentario = ({game}) => {
+    
     const init = () =>{
         if(JSON.parse(localStorage.getItem("comentarios")))
             return JSON.parse(localStorage.getItem("comentarios"))
         return [];
     }
-    const[comentarios, setComentarios] = useState([])
+   
     const [state, dispatch] = useReducer(reducer, [], init);
-    
-    
-    
-
-
-    useEffect(() => {
-        if(JSON.parse(localStorage.getItem("comentarios"))){
-            let coments = JSON.parse(localStorage.getItem("comentarios"))
-            setComentarios(coments)
-           
-        }
-            
-       
-    }, []); 
 
     const handleSubmit = (values) => {
         values.ponto = 10;
-        if(comentarios)
-            setComentarios([values])
-       setComentarios([...comentarios,values])
-        localStorage.setItem("comentarios",JSON.stringify([...comentarios,values]));
-        console.log('HandleSubmit',comentarios)
+        values.id = game.id;
+        // if(state)
+        // setComentarios([values])
+        // setComentarios([...comentarios,values])
+        //localStorage.setItem("comentarios",JSON.stringify([...comentarios,values]));
+        console.log('HandleSubmit',state)
+        dispatch({type: "addComent",index: 0, p:values})
     };
     
     const schema = Yup.object().shape({
@@ -96,7 +91,8 @@ export const FormComentario = () => {
                 </Formik>
                 
                 {state.map((e,i)=>
-                    <DivComentario>
+                    e.id==game.id?
+                    (<DivComentario>
                         <ContainerComentarios>
 
                             <Nome>{e.nome}:</Nome>
@@ -104,10 +100,11 @@ export const FormComentario = () => {
                         </ContainerComentarios>
                         
                         <VotoUp onClick={()=>dispatch({type: "increment",index: i, p: e})}></VotoUp>
-                        <PontuacaoP className="red">{e.ponto}</PontuacaoP>
+                        {e.ponto< 0 ?<PontuacaoP className="red">{e.ponto}</PontuacaoP>:<PontuacaoP className="green">+{e.ponto}</PontuacaoP>}
                        
                         <VotoDown onClick={()=>dispatch({type: "decrement",index: i, p: e})}></VotoDown>
-                    </DivComentario>
+                    </DivComentario>)
+                    :""
                 )}
                 
             </>

@@ -8,8 +8,31 @@ import { AutenticacaoContext, AutenticacaoProvider, useAutenticacao } from "./co
 import { Home } from "./components/Home/Home";
 import { Router } from "./routes/Router";
 import { BrowserRouter } from 'react-router-dom';
+import { myTheme } from './themes/themes';
+import { ThemeProvider } from 'styled-components';
+import { Cabecalho } from "./components/Cabecalho";
+import { GameContext, GameContextProvider } from "./context/GameContext";
+
 
 function App() {
+  
+  
+  return (
+    <div className="App">
+    
+      <ThemeProvider theme={myTheme}>
+        <GameContextProvider>
+          <BrowserRouter>
+              <Cabecalho></Cabecalho>
+              <Router />
+          </BrowserRouter>
+        </GameContextProvider>
+       
+      </ThemeProvider>
+    
+   </div>
+    
+  );
 
 /*  // EXERCICIO 3
   const inicialValue = []
@@ -71,17 +94,7 @@ const inicialValue = [0]
 
 
  
-  return (
-    <div className="App">
-    
-      <BrowserRouter>
-          <Router />
-        </BrowserRouter>
-      
-    
-   </div>
-    
-  );
+  
 }
 
 export default App; 
